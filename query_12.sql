@@ -6,5 +6,9 @@ JOIN subjects ON grades.subject_id = subjects.id
 WHERE groups.id = 1
 	AND subjects.id = 3
 	AND grades.date = (
-		SELECT MAX(date) FROM grades WHERE grades.subject_id = 3
+		SELECT MAX(date)
+		FROM grades
+		JOIN students ON grades.student_id = students.id
+		WHERE grades.subject_id = 3
+		  AND students.group_id = 1
 	);
